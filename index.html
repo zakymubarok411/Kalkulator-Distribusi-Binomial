@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulasi Kebutuhan Cairan</title>
+</head>
+<body>
+    <h1>Simulasi Kebutuhan Cairan Harian</h1>
+    <form method="post">
+        <label for="berat_badan">Berat Badan (kg):</label><br>
+        <input type="number" id="berat_badan" name="berat_badan" step="0.1" required><br><br>
+
+        <label for="jumlah_sesi">Jumlah Sesi Minum:</label><br>
+        <input type="number" id="jumlah_sesi" name="jumlah_sesi" required><br><br>
+
+        <label for="probabilitas">Probabilitas Minum Cukup (%):</label><br>
+        <input type="number" id="probabilitas" name="probabilitas" step="0.01" min="0" max="1" required><br><br>
+
+        <button type="submit">Jalankan Simulasi</button>
+    </form>
+
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    {% if hasil %}
+    <h2>Hasil Simulasi</h2>
+    <p><b>Berat Badan:</b> {{ berat_badan }} kg</p>
+    <p><b>Jumlah Sesi Minum:</b> {{ jumlah_sesi }}</p>
+    <p><b>Probabilitas Minum Cukup (p):</b> {{ probabilitas }}</p>
+
+    <h3>Perhitungan Kebutuhan Cairan</h3>
+    <p><b>Kebutuhan Cairan Harian:</b> {{ kebutuhan_cairan }} ml (Rumus: berat badan × 35)</p>
+    <p><b>Cairan per Sesi:</b> {{ cairan_per_sesi }} ml (Rumus: kebutuhan cairan ÷ jumlah sesi)</p>
+
+    <h3>Hasil Statistik Simulasi</h3>
+    <p><b>Rata-rata Cairan Diminum:</b> {{ rata_rata_cairan }} ml</p>
+    <p><b>Standar Deviasi:</b> {{ standar_deviasi_cairan }} ml</p>
+
+    <h3>Contoh Iterasi Simulasi</h3>
+    <p><b>Jumlah Sesi Sukses:</b> {{ contoh_iterasi }} sesi</p>
+    <p><b>Total Cairan yang Diminum:</b> {{ cairan_diminum_contoh }} ml (Rumus: sesi sukses × cairan per sesi)</p>
+
+    <h3>Visualisasi Histogram</h3>
+    <img src="{{ plot_path }}" alt="Histogram">
+    {% endif %}
+</body>
+</html>
